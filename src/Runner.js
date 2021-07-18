@@ -164,7 +164,7 @@ function run(transformFile, paths, options) {
   const cpus = options.cpus ? Math.min(availableCpus, options.cpus) : availableCpus;
   const extensions =
     options.extensions && options.extensions.split(',').map(ext => '.' + ext);
-  const fileCounters = {error: 0, ok: 0, nochange: 0, skip: 0};
+  const fileCounters = {error: 0, ok: 0, nochange: 0, skip: 0}; // 处理结果
   const statsCounter = {};
   const startTime = process.hrtime();
 
@@ -298,7 +298,7 @@ function run(transformFile, paths, options) {
             process.stdout.write(
               'Time elapsed: ' + timeElapsed + 'seconds \n'
             );
-            
+
             if (options.failOnError && fileCounters.error > 0) {
               process.exit(1);
             }

@@ -123,7 +123,10 @@ const parser = require('../src/argsParser')
 
 let options, positionalArguments;
 try {
+  // 区分文件参数和其他参数
   ({options, positionalArguments} = parser.parse());
+
+  // 没有传入文件就会报这个错误信息
   if (positionalArguments.length === 0 && !options.stdin) {
     process.stderr.write(
       'Error: You have to provide at least one file/directory to transform.' +
@@ -138,6 +141,8 @@ try {
   process.exit(exitCode);
 }
 function run(paths, options) {
+
+  // jscodeshift 的 transform 是可以传入一个 URL 的，如果是 http 或者 https 代表是一个 URL 的 transform，不做路径解析
   Runner.run(
     /^https?/.test(options.transform) ? options.transform : path.resolve(options.transform),
     paths,

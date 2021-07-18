@@ -45,10 +45,13 @@ if (module.parent) {
   setup(process.argv[2], process.argv[3]);
 }
 
+/**
+ * 准备jscodeshift编译器，默认是babel
+ */
 function prepareJscodeshift(options) {
   const parser = parserFromTransform ||
     getParser(options.parser, options.parserConfig);
-  return jscodeshift.withParser(parser);
+  return jscodeshift.withParser(parser);  // 可以通过withParser手动指定编译器
 }
 
 function setup(tr, babel) {

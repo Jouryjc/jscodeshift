@@ -68,6 +68,9 @@ ${opts.map(formatOption).join('\n')}
   return text.trimLeft();
 }
 
+/**
+ * 校验参数
+ */
 function validateOptions(parsedOptions, options) {
   const errors = [];
   for (const optionName in options) {
@@ -87,6 +90,9 @@ function validateOptions(parsedOptions, options) {
   }
 }
 
+/**
+ * 对默认参数做一些默认处理，加上key、full等
+ */
 function prepareOptions(options) {
   options.help = {
     abbr: 'h',
@@ -117,6 +123,9 @@ function prepareOptions(options) {
   return preparedOptions;
 }
 
+/**
+ * 判断参数是不是 option 参数
+ */
 function isOption(value) {
   return /^--?/.test(value);
 }
@@ -127,7 +136,7 @@ function parse(options, args=process.argv.slice(2)) {
 
   const parsedOptions = {};
   const positionalArguments = [];
-
+  // 获取完整的解析配置，对于有默认值的赋默认值
   for (const optionName in options) {
     const option = options[optionName];
     if (option.default !== undefined) {
@@ -136,7 +145,7 @@ function parse(options, args=process.argv.slice(2)) {
       parsedOptions[optionName] = [];
     }
   }
-
+  // 遍历CLI的参数
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
     if (isOption(arg)) {
