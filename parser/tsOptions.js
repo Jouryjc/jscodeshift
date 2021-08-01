@@ -13,13 +13,18 @@
  */
 module.exports = {
   sourceType: 'module',
+  // 允许代码任何地方进行 import、export
   allowImportExportEverywhere: true,
+  // 允许在函数外面进行 return
   allowReturnOutsideFunction: true,
+  // 从第一行开始解析代码
   startLine: 1,
+  // 将所有解析的标记添加到文件节点上的标记属性
   tokens: true,
+  // https://babeljs.io/docs/en/babel-parser#plugins
   plugins: [
     'asyncGenerators',
-    'bigInt',
+    'bigInt', //
     'classPrivateMethods',
     'classPrivateProperties',
     'classProperties',

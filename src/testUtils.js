@@ -12,6 +12,9 @@
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * 获取transform
+ */
 function applyTransform(module, options, input, testOptions = {}) {
   // Handle ES6 modules using default export for the transform
   const transform = module.default ? module.default : module;
@@ -36,6 +39,9 @@ function applyTransform(module, options, input, testOptions = {}) {
 }
 exports.applyTransform = applyTransform;
 
+/**
+ * 快照测试
+ */
 function runSnapshotTest(module, options, input) {
   const output = applyTransform(module, options, input);
   expect(output).toMatchSnapshot();
@@ -43,6 +49,9 @@ function runSnapshotTest(module, options, input) {
 }
 exports.runSnapshotTest = runSnapshotTest;
 
+/**
+ * 内联测试
+ */
 function runInlineTest(module, options, input, expectedOutput, testOptions) {
   const output = applyTransform(module, options, input, testOptions);
   expect(output).toEqual(expectedOutput.trim());

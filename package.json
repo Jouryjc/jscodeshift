@@ -11,7 +11,9 @@
   "scripts": {
     "prepare": "cp -R src/ dist/",
     "test": "jest --bail",
-    "docs": "rm -rf docs && jsdoc -d docs -R README.md src/collections/* src/core.js src/Collection.js"
+    "docs": "rm -rf docs && jsdoc -d docs -R README.md src/collections/* src/core.js src/Collection.js",
+    "transform": "npx jscodeshift -t ./example/transform.js ./example/test.js -p",
+    "testUtils": "npx jest ./example/__tests__/remove_console-test.js"
   },
   "bin": {
     "jscodeshift": "./bin/jscodeshift.js"
@@ -59,7 +61,8 @@
       "src",
       "bin",
       "parser",
-      "sample"
+      "sample",
+      "example"
     ]
   }
 }

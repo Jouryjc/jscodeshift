@@ -29,7 +29,7 @@ let notify;
 let transform;
 let parserFromTransform;
 
-if (module.parent) {
+if (module.parent) {  // 如果有父进程的情况，定义结束事件
   emitter = new EventEmitter();
   emitter.send = (data) => { run(data); };
   finish = () => { emitter.emit('disconnect'); };
@@ -46,7 +46,7 @@ if (module.parent) {
 }
 
 /**
- * 准备jscodeshift编译器，默认是babel
+ * 获取 jscodeshift 编译器，默认是babel
  */
 function prepareJscodeshift(options) {
   const parser = parserFromTransform ||
